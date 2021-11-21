@@ -1,0 +1,44 @@
+Created on Fri Nov 19 07:24:57 2021
+
+@author: User
+"""
+# import Library
+import mysql.connector
+from mysql.connector import Error
+import pandas as pd
+# fnction to connect to MySQL DB
+def connection_DB(hostname, user_name, user_password, db_name):
+    connection = None
+    try:
+        connection = mysql.connector.connect(
+            host= hostname, user =user_name,passwd= user_password, database=db_name )
+        print(" Connection to MySQL DB successful")   
+    except Error as e:
+        print(f"The error '{e}' occured")      
+    return connection      
+# function to execute SQL query 
+def execute_read_query(connection, query):
+    cursor = connection.cursor()
+    results = None
+    try:
+        cursor.execute(query)
+        results = cursor.fetchall()
+        return results
+    except Error as e:
+        print(f"The error '{e}' occured")
+# main code 
+host_name='localhost' # change to the host name of yoru DB
+user_name = 'root'    # add the user_name for your DB if not root
+user_password='HHHHHH1h34'   # enter your password of your Database
+db_name = "imcdb"
+
+connection = connection_DB(host_name, user_name, user_password, db_name)
+
+# select all records on Table imcdata
+read_table  = " SELECT *FROM imcdata" 
+
+# define SQL query to read table from DB
+data = pd.read_sql(read_table, connection)
+# print the first five rows of the dataFrame
+print(data.head())
+
