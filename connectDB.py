@@ -18,9 +18,9 @@ def create_connection(host_name, user_name, user_password):
 
 connection = create_connection("localhost", "root", "")
 
-host_name='localhost'
+host_name='localhost'    # change to name of your DB
 database ='test'
-user_name = 'root'
-user_password='abcd1234'
+user_name = 'root'       # change to user name of your DB
+user_password='abcdrrrr' # change to your password of your DB
 # main code
 create_connection(host_name, user_name, user_password)
